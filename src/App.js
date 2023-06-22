@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
-
+import Navbar from './Navbar'
+import Home from './Home'
+import AboutUs from './AboutUs'
 function App() {
+
+  const [State,changeState]=React.useState("Home");
+  function handleClickHome(){
+   if(State=="About Us"){
+     changeState("Home");
+   }
+  }
+   function handleClickAboutUs(){
+     if(State=="Home"){
+       changeState("About Us");
+     }
+   }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar State={State} handleClickHome={handleClickHome}  handleClickAboutUs={handleClickAboutUs} />
+      {State === "Home" ? <Home /> : <AboutUs />}
     </div>
   );
 }
